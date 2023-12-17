@@ -1,0 +1,34 @@
+---
+- name: Bootstrap enviroment
+  hosts: personal_environment
+  connection: local
+  tasks:
+    - name: Package
+      tags: package
+      import_role:
+        name: package
+
+    - name: Font
+      tags: font
+      import_role:
+        name: font
+
+    - name: Neovim
+      tags: neovim
+      import_role:
+        name: neovim
+
+    - name: Dotfiles
+      tags: dotfiles
+      import_role:
+        name: dotfiles
+          
+    - name: Git
+      tags: git
+      import_role:
+        name: git
+
+    - name: Desktop
+      tags: desktop
+      import_role:
+        name: destop

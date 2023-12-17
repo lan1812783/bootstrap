@@ -1,0 +1,12 @@
+# vscode
+.vscode
+
+# clangd
+.cache
+.clangd
+
+#jdtls
+.settings
+bin
+.classpath
+.project

@@ -1,0 +1,44 @@
+---
+- name: Check if there is currently any installation available
+  command: nvim -v
+  register: nvim_version
+  ignore_errors: true
+  changed_when: false
+
+- name: Install build prerequisites
+  become: true
+  package:
+    name:
+      - ninja-build
+      - gettext
+      - cmake
+      - unzip
+      - curl
+  when: nvim_version.rc != 0
+
+- name: Create a directory for storing repositories
+  file:
+    path: deps
+    state: directory
+  when: nvim_version.rc != 0
+
+- name: Clone the repository
+  git:
+    repo: https://github.com/neovim/neovim
+    dest: deps/neovim
+    version: stable
+  when: nvim_version.rc != 0
+
+- name: Build the stable release
+  community.general.make:
+    chdir: deps/neovim
+    params:
+      CMAKE_BUILD_TYPE: RelWithDebInfo
+  when: nvim_version.rc != 0
+
+- name: Install binary
+  become: true
+  community.general.make:
+    chdir: deps/nvim
+    target: install
+  when: nvim_version.rc != 0

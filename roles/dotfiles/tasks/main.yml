@@ -1,0 +1,4 @@
+---
+- name: Set up dotfiles
+  import_tasks: unix.yml
+  when: ansible_distribution == 'Ubuntu'

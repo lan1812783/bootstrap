@@ -1,0 +1,8 @@
+---
+- name: Install essential packages
+  become: true
+  package:
+    name:
+      - ripgrep
+      - tree
+      - tmux

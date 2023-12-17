@@ -1,0 +1,4 @@
+---
+- name: Configure git globally
+  import_tasks: unix.yml
+  when: ansible_distribution == 'Ubuntu'

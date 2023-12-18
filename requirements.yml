@@ -1,0 +1,3 @@
+collections:
+  - name: community.general
+    version: '>=8.1.0' # https://docs.ansible.com/ansible/latest/collections/community/general/git_config_module.html#parameter-add_mode

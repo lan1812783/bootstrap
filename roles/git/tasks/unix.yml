@@ -1,21 +1,13 @@
 ---
-- name: Set up global gitignore
-  vars:
-    gitignore_setup_msg: 'Set up global gitignore as the file:'
-    global_gitignore_path: '{{ ansible_env.HOME }}/.gitignore_global'
-  shell: |
-    CUR_GLOBAL_GITIGNORE_PATH=$(git config --global core.excludesFile)
-    if [[ -z $CUR_GLOBAL_GITIGNORE_PATH ]]; then
-      git config --global core.excludesFile {{ global_gitignore_path }}
-      echo {{ gitignore_setup_msg }} $CUR_GLOBAL_GITIGNORE_PATH
-    else
-      echo Found previously set global gitignore file: $CUR_GLOBAL_GITIGNORE_PATH
-    fi
-  register: global_gitignore_setup_message
-  args:
-    removes: '{{ global_gitignore_path }}'
-  changed_when: global_gitignore_setup_message.stdout_lines is search(gitignore_setup_msg)
+- name: Check for global gitignore file
+  stat:
+    path: '{{ global_gitignore_path }}'
+  register: global_gitignore_file
 
-- name: Print messages
-  debug:
-    msg: '{{ global_gitignore_setup_message.stdout_lines }}'
+- name: Set up global gitconfig
+  community.general.git_config:
+    name: core.excludesFile
+    add_mode: add
+    scope: global
+    value: '{{ global_gitignore_path }}'
+  when: global_gitignore_file.stat.exists == true

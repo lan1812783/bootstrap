@@ -16,6 +16,13 @@
       - curl
   when: nvim_version.rc != 0
 
+- name: Install plugins' dependencies
+  become: true
+  package:
+    name:
+      - ripgrep # telescope.nvim
+  when: nvim_version.rc != 0
+
 - name: Create a directory for storing repositories
   file:
     path: deps
@@ -39,6 +46,6 @@
 - name: Install binary
   become: true
   community.general.make:
-    chdir: deps/nvim
+    chdir: deps/neovim
     target: install
   when: nvim_version.rc != 0

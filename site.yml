@@ -2,11 +2,21 @@
 - name: Bootstrap enviroment
   hosts: personal_environment
   connection: local
+  pre_tasks:
+    - name: Update cache
+      become: true
+      package:
+        update_cache: true
   tasks:
     - name: Package
       tags: package
       import_role:
         name: package
+
+    - name: Node
+      tags: node
+      import_role:
+        name: node
 
     - name: Font
       tags: font

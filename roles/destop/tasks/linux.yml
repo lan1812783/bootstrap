@@ -4,6 +4,16 @@
     name:
       - psutil>=4.0.0
 
+- name: Unmap <F10> (in case of using nvim-dap)
+  community.general.dconf:
+    key: '/org/gnome/terminal/legacy/menu-accelerator-enabled'
+    value: 'false'
+
+- name: Unmap <F11> (in case of using nvim-dap)
+  community.general.dconf:
+    key: '/org/gnome/terminal/legacy/keybindings/full-screen'
+    value: "'disabled'" # syntax for string value instead of boolean one
+
 - name: Show seconds in clock
   community.general.dconf:
     key: '/org/gnome/desktop/interface/clock-show-seconds'

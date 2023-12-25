@@ -1,0 +1,4 @@
+---
+- name: Install nvm and node
+  import_tasks: unix.yml
+  when: ansible_distribution == 'Ubuntu'

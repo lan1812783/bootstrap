@@ -1,4 +1,9 @@
 ---
+- name: Clone Tmux Plugin Manager repository
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: '{{ ansible_env.HOME }}/.tmux/plugins/tpm'
+
 - name: Set up dotfiles
   import_tasks: unix.yml
   when: ansible_distribution == 'Ubuntu'

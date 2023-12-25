@@ -11,3 +11,10 @@
     scope: global
     value: '{{ global_gitignore_path }}'
   when: global_gitignore_file.stat.exists == true
+
+- name: Set git core editor to neovim
+  community.general.git_config:
+    name: core.editor
+    add_mode: add
+    scope: global
+    value: nvim

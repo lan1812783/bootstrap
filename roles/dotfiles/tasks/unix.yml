@@ -9,5 +9,10 @@
   shell:
     chdir: dotfiles
     cmd: stow --target={{ ansible_env.HOME }} --verbose=2 *
+  ignore_errors: true
   register: stow_result
   changed_when: 'stow_result.stderr is search("LINK: ")'
+
+- name: Print messages
+  debug:
+    msg: '{{ stow_result.stderr_lines }}'

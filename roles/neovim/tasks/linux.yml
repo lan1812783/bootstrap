@@ -25,27 +25,28 @@
 
 - name: Create a directory for storing repositories
   file:
-    path: deps
+    path: '{{ dep_dir_path }}'
     state: directory
   when: nvim_version.rc != 0
 
 - name: Clone the repository
   git:
     repo: https://github.com/neovim/neovim
-    dest: deps/neovim
+    dest: '{{ dep_dir_path }}/neovim'
     version: stable
   when: nvim_version.rc != 0
 
 - name: Build the stable release
   community.general.make:
-    chdir: deps/neovim
+    chdir: '{{ dep_dir_path }}/neovim'
+    jobs: 4
     params:
       CMAKE_BUILD_TYPE: RelWithDebInfo
   when: nvim_version.rc != 0
 
-- name: Install binary
+- name: Install the binary
   become: true
   community.general.make:
-    chdir: deps/neovim
+    chdir: '{{ dep_dir_path }}/neovim'
     target: install
   when: nvim_version.rc != 0

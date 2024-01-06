@@ -18,3 +18,24 @@
     add_mode: add
     scope: global
     value: nvim
+
+- name: Set up git difftool
+  community.general.git_config:
+    name: diff.tool
+    add_mode: add
+    scope: global
+    value: nvimdiff
+
+- name: Set git difftool to not prompt
+  community.general.git_config:
+    name: difftool.prompt
+    add_mode: add
+    scope: global
+    value: false
+
+- name: Set up git difftool command
+  community.general.git_config:
+    name: difftool.nvimdiff.cmd
+    add_mode: add
+    scope: global
+    value: nvim -d "$LOCAL" "$REMOTE"

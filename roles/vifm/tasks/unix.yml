@@ -1,0 +1,72 @@
+---
+- name: Check if there is currently any installation available
+  command: vifm -v
+  register: vifm_version
+  ignore_errors: true
+  changed_when: false
+
+- name: Create a directory for storing repositories
+  file:
+    path: '{{ dep_dir_path }}'
+    state: directory
+  when: vifm_version.rc != 0
+
+- name: Clone the repository
+  git:
+    repo: https://github.com/vifm/vifm.git
+    dest: '{{ dep_dir_path }}/vifm'
+  when: vifm_version.rc != 0
+
+- name: Install build dependencies
+  become: true
+  package:
+    name:
+      - libncursesw5-dev
+  when: vifm_version.rc != 0
+
+- name: Configure the source code
+  shell:
+    chdir: '{{ dep_dir_path }}/vifm'
+    cmd: |
+      scripts/fix-timestamps
+      ./configure
+  when: vifm_version.rc != 0
+
+- name: Build the binary
+  community.general.make:
+    chdir: '{{ dep_dir_path }}/vifm'
+    jobs: 4
+  when: vifm_version.rc != 0
+
+- name: Install the binary
+  become: true
+  community.general.make:
+    chdir: '{{ dep_dir_path }}/vifm'
+    target: install
+  when: vifm_version.rc != 0
+
+- name: Remove the default 'vifmrc' configuration file for later stow
+  file:
+    path: '{{ ansible_env.HOME }}/.config/vifm/vifmrc'
+    state: absent
+  when: vifm_version.rc != 0
+
+- name: Install colorschemes
+  git:
+    repo: https://github.com/vifm/vifm-colors
+    dest: '{{ ansible_env.HOME }}/.config/vifm/colors'
+  when: vifm_version.rc != 0
+
+- name: Install icons
+  git:
+    repo: https://github.com/thimc/vifm_devicons.git
+    dest: '{{ ansible_env.HOME }}/.config/vifm/devicons'
+  when: vifm_version.rc != 0
+
+- name: Install quickview dependencies
+  become: true
+  package:
+    name:
+      - bat
+      - tree
+  when: vifm_version.rc != 0

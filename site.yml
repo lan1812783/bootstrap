@@ -28,6 +28,11 @@
       import_role:
         name: neovim
 
+    - name: Vifm
+      tags: vifm
+      import_role:
+        name: vifm
+
     - name: Dotfiles
       tags: dotfiles
       import_role:

@@ -28,6 +28,11 @@
       import_role:
         name: neovim
 
+    - name: SDKMAN!
+      tags: sdkman
+      import_role:
+        name: sdkman
+
     - name: Vifm
       tags: vifm
       import_role:
@@ -37,7 +42,7 @@
       tags: dotfiles
       import_role:
         name: dotfiles
-          
+
     - name: Git
       tags: git
       import_role:

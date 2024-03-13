@@ -1,0 +1,7 @@
+---
+- name: Install SDKMAN!
+  shell: curl -s "https://get.sdkman.io" | bash # the script already checks for previous installation
+
+- name: Install JDK and gradle
+  # SDKMAN! will manage the JAVA_HOME environment variable after installing java
+  shell: bash -ilc 'sdk install java 17.0.10-tem; sdk install gradle'

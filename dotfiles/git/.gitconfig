@@ -1,0 +1,36 @@
+# To manage configs for different directory, refer to this link
+# https://blog.hao.dev/how-to-use-different-git-emails-for-personal-and-work-repositories-on-the-same-machine
+
+[user]
+	email = buihoanglan.work@gmail.com
+	name = Bui Hoang Lan
+[core]
+	excludesFile = /home/lan/.gitignore_global
+	editor = nvim
+[diff]
+	tool = mynvimdiff
+[difftool]
+	prompt = False
+	trustExitCode = true # be able to abort all diffs with `:cq` or `:cquit` (https://stackoverflow.com/a/34065448)
+[difftool "mynvimdiff"]
+	# Although the default nvimdiff difftool command is viable,
+	# defining a custom one here for nvim non-readonly mode and
+	# consistency across git versions (see mergetool config section for more details)
+	cmd = nvim -d -c 'wincmd l' \"$LOCAL\" \"$REMOTE\"
+[init]
+	defaultBranch = main
+[merge]
+	tool = mynvimdiff
+[mergetool]
+	prompt = false
+	keepBackup = false
+[mergetool "mynvimdiff"]
+	# As of git v2.37.0-rc0, the default nvimdiff mergetool command
+	# does not pass '-d' to nvim as an argument
+	# (https://neovim.io/doc/user/starting.html#_nvim-arguments),
+	# this answer (https://stackoverflow.com/a/68219142/12141366)
+	# on stackoverflow refers to the commands defaults by git v2.32.0,
+	# which does pass '-d' to nvim as an argument,
+	# be certain to check the current git version in your machine
+	# to decide whether to use the defaults or not
+	cmd = nvim -d -c '4wincmd w | wincmd J' \"$LOCAL\" \"$BASE\" \"$REMOTE\" \"$MERGED\"

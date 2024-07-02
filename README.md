@@ -30,7 +30,7 @@ Close and reopen the terminal.
 1. Open 'Preferences' > 'Profiles'
 2. Select a profile to use
 3. Check the 'Custom font' checkbox
-4. Choose the 'Hack Nerd Font Regular' as the custom font
+4. Choose the 'JetBrainsMono Nerd Font Regular' as the custom font
    > If the font is not found, try logging out then logging in back or restarting your computer
 
 ## Set up tmux

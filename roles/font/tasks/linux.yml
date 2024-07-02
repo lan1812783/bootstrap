@@ -7,5 +7,5 @@
 - name: Install font
   shell:
     chdir: '{{ font_dir_path }}'
-    cmd: curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf
-    creates: '{{ font_dir_path }}/HackNerdFont-Regular.ttf'
+    cmd: curl -fLO https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf
+    creates: '{{ font_dir_path }}/JetBrainsMonoNerdFont-Regular.ttf'

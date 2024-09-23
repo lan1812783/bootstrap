@@ -48,7 +48,12 @@
       import_role:
         name: git
 
+    - name: Google style guide
+      tags: googlestyleguide
+      import_role:
+        name: googlestyleguide
+
     - name: Desktop
       tags: desktop
       import_role:
-        name: destop
+        name: desktop

@@ -1,4 +1,0 @@
----
-- name: Set up desktop
-  import_tasks: linux.yml
-  when: ansible_distribution == 'Ubuntu'

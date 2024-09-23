@@ -1,0 +1,7 @@
+---
+- name: Set up desktop
+  include_tasks: '{{ item }}' # https://stackoverflow.com/a/58773661, https://serverfault.com/a/875292
+  loop:
+    - look_and_feel.linux.yml
+    - keybinding.linux.yml
+  when: ansible_distribution == 'Ubuntu'

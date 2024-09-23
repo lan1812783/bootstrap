@@ -7,4 +7,5 @@
       - htop
       - tree
       - tmux
+      - vim
       - xsel # tmux plugin's tmux-yank's dependency

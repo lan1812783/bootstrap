@@ -1,0 +1,12 @@
+---
+- name: Download pylintrc from Google Python style guide
+  shell:
+    chdir: '{{ ansible_env.HOME }}/.config' # refer to the order where Pylint will search for a configuration file: https://pylint.pycqa.org/en/latest/user_guide/usage/run.html#command-line-options
+    cmd: curl -fLO https://google.github.io/styleguide/pylintrc
+    creates: '{{ ansible_env.HOME }}/.config/pylintrc'
+
+- name: Customize pylintrc from Google Python style guide
+  replace:
+    path: '{{ ansible_env.HOME }}/.config/pylintrc'
+    regexp: "^indent-string='  '$"
+    replace: "indent-string='    '"

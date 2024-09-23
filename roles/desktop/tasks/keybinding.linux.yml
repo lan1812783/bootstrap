@@ -1,0 +1,20 @@
+---
+- name: Unmap <F10> (in case of using nvim-dap)
+  community.general.dconf:
+    key: '/org/gnome/terminal/legacy/menu-accelerator-enabled'
+    value: 'false'
+
+- name: Unmap <F11> (in case of using nvim-dap)
+  community.general.dconf:
+    key: '/org/gnome/terminal/legacy/keybindings/full-screen'
+    value: "'disabled'" # syntax for string value instead of boolean one
+
+- name: Install Flameshot
+  become: true
+  package:
+    name: flameshot
+
+- name: Set Flameshot custom keyboard shortcut
+  script:
+    cmd: set_custom_keyboard_shortcut.py --name 'Flameshot gui' --command 'flameshot gui' --binding '<Control><Alt><Shift>f'
+    executable: python3

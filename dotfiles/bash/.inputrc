@@ -1,0 +1,14 @@
+$include /etc/inputrc
+
+# When pasting text from the clipboard (tmux, browsers, programs, etc),
+# the characters are often interpreted as inputs from the keyboard, hence, the
+# newline character is treated as if the enter key was hit, which makes most
+# shell execute the pasted text as a command. Sometime we don't want that
+# because we may unexpectedly run a harmful command.
+# This option is supported since readline-7.0,
+# and is enabled by default since readline-8.1.
+# Ref:
+#   https://unix.stackexchange.com/a/96398 (how to turn this behaviour off)
+#   https://tiswww.case.edu/php/chet/readline/CHANGES (readline changelog)
+#   https://superuser.com/a/1613890 (check readline version)
+set enable-bracketed-paste on

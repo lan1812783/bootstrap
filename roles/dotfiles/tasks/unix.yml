@@ -13,6 +13,18 @@
   register: stow_result
   changed_when: 'stow_result.stderr is search("LINK: ")'
 
-- name: Print messages
+- name: Print GNU Stow messages
   debug:
     msg: '{{ stow_result.stderr_lines }}'
+
+- name: Set up EDITOR environment variable
+  lineinfile:
+    path: '{{ ansible_env.HOME }}/.profile'
+    regexp: '^EDITOR='
+    line: EDITOR=nvim
+
+- name: Set up VISUAL environment variable
+  lineinfile:
+    path: '{{ ansible_env.HOME }}/.profile'
+    regexp: '^VISUAL='
+    line: VISUAL=nvim

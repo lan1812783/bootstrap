@@ -6,6 +6,7 @@ noremap <Right> <Nop>
 
 " Options
 set formatoptions+=j
+set hidden
 set hlsearch ignorecase incsearch smartcase
 set laststatus=2
 set linebreak scrolloff=5

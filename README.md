@@ -5,7 +5,7 @@ Set up personal environment (Ubuntu).
 ## Dependencies
 
 - Python 3
-- Ansible >= 2.13.0 ([required by ansible community.general version 8.1.0](https://galaxy.ansible.com/ui/repo/published/community/general/?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW))
+- Ansible >= 2.13.0 ([required by ansible community.general version 8.1.0](https://galaxy.ansible.com/ui/repo/published/community/general/?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW&version=8.1.0))
 
 ## Set up environment
 
@@ -18,9 +18,11 @@ cd bootstrap
 # https://stackoverflow.com/a/67662402/12141366
 # sudo update-ca-certificates --fresh
 # export SSL_CERT_DIR=/etc/ssl/certs
-ansible-galaxy collection install -r requirements.yml
+python3 -m ansible galaxy collection install -r requirements.yml # if ansible is installed using pip
+# ansible-galaxy collection install -r requirements.yml # if ansible is installed using package manager
 
-ansible-playbook --ask-become-pass site.yml
+python3 -m ansible playbook --ask-become-pass site.yml # if ansible is installed using pip
+# ansible-playbook --ask-become-pass site.yml # if ansible is installed using package manager
 ```
 
 Close and reopen the terminal.

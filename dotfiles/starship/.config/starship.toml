@@ -1,0 +1,26 @@
+format = """
+$username\
+$hostname\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$custom\
+$line_break\
+$status\
+$character"""
+
+[directory]
+truncate_to_repo = false
+truncation_symbol = '…/'
+
+# https://unix.stackexchange.com/a/155077
+[custom.git_status_worktree_clean]
+when = '[[ $(git rev-parse --is-inside-work-tree) == "true" && -z $(git status --untracked-files=no --porcelain) ]]'
+command = 'echo  '
+style = 'bold green'
+
+[custom.git_status_worktree_dirty]
+when = '[[ $(git rev-parse --is-inside-work-tree) == "true" && -n $(git status --untracked-files=no --porcelain) ]]'
+command = 'echo  '
+style = 'bold red'

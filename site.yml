@@ -38,6 +38,11 @@
       import_role:
         name: vifm
 
+    - name: Starship
+      tags: starship
+      import_role:
+        name: starship
+
     - name: Dotfiles
       tags: dotfiles
       import_role:

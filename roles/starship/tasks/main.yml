@@ -1,0 +1,4 @@
+---
+- name: Install starship
+  import_tasks: unix.yml
+  when: ansible_distribution == 'Ubuntu'

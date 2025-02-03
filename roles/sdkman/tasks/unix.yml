@@ -4,4 +4,6 @@
 
 - name: Install JDK and gradle
   # SDKMAN! will manage the JAVA_HOME environment variable after installing java
-  shell: bash -ilc 'sdk install java 17.0.10-tem; sdk install gradle'
+  # If this is a fresh installation then `yes` command is not needed,
+  # but if there has been a default version already, then `yes` command is used to make the latest stable version the default
+  shell: bash -ilc 'yes | sdk install java; yes | sdk install gradle'

@@ -1,0 +1,46 @@
+---
+- name: Install binary
+  become: true
+  package:
+    name:
+      - awesome
+
+- name: Check if there is currently any arc icon theme installation available
+  stat:
+    path: /usr/share/icons/Arc
+  register: arc_icon_theme_folder
+  changed_when: false
+
+- name: Install arc icon theme
+  import_tasks:
+    file: arc_icon_theme.yml
+  when: not arc_icon_theme_folder.stat.exists
+
+- name: 'Install widget dependencies (ref: https://github.com/streetturtle/awesome-wm-widgets)'
+  become: true
+  package:
+    name:
+      # battery-widget
+      - acpi
+      # brightness-widget
+      - light
+      # logout-menu-widget
+      - i3lock
+      - xss-lock
+      # volume-widget
+      - alsa-tools # contain 'amixer'
+      - pulseaudio-utils # contain 'pacmd'
+      - pavucontrol
+
+- name: Add '{{ ansible_env.USER }}' user to 'video' group (required for 'light' package to work)
+  become: true
+  user:
+    name: '{{ ansible_env.USER }}'
+    append: true
+    groups:
+      - video
+
+- name: Clone awesome-wm-widgets repository
+  git:
+    repo: https://github.com/streetturtle/awesome-wm-widgets.git
+    dest: '{{ ansible_env.HOME }}/.config/awesome/awesome-wm-widgets'

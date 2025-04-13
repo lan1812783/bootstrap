@@ -1,0 +1,28 @@
+---
+- name: Install build prerequisites
+  become: true
+  package:
+    name:
+      - autoconf
+
+- name: Create a directory for storing repositories
+  file:
+    path: '{{ dep_dir_path }}'
+    state: directory
+
+- name: Clone the repository
+  git:
+    repo: https://github.com/horst3180/arc-icon-theme
+    dest: '{{ dep_dir_path }}/arc-icon-theme'
+    depth: 1
+
+- name: Configure the source code
+  shell:
+    chdir: '{{ dep_dir_path }}/arc-icon-theme'
+    cmd: ./autogen.sh --prefix=/usr
+
+- name: Install theme
+  become: true
+  community.general.make:
+    chdir: '{{ dep_dir_path }}/arc-icon-theme'
+    target: install

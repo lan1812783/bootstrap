@@ -33,6 +33,11 @@
       import_role:
         name: sdkman
 
+    - name: Awesome
+      tags: awesome
+      import_role:
+        name: awesome
+
     - name: Vifm
       tags: vifm
       import_role:

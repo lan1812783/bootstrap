@@ -6,9 +6,9 @@
 	name = Bui Hoang Lan
 [core]
 	excludesFile = /home/lan/.gitignore_global
-	editor = nvim
 [diff]
 	tool = mynvimdiff
+	wsErrorHighlight = all # highlight removed trailing white spaces when using `git diff` (https://stackoverflow.com/a/5259137)
 [difftool]
 	prompt = False
 	trustExitCode = true # be able to abort all diffs with `:cq` or `:cquit` (https://stackoverflow.com/a/34065448)
@@ -26,11 +26,11 @@
 	keepBackup = false
 [mergetool "mynvimdiff"]
 	# As of git v2.37.0-rc0, the default nvimdiff mergetool command
-	# does not pass '-d' to nvim as an argument
+	# no longer passes `-d` to nvim as an argument
 	# (https://neovim.io/doc/user/starting.html#_nvim-arguments),
 	# this answer (https://stackoverflow.com/a/68219142/12141366)
-	# on stackoverflow refers to the commands defaults by git v2.32.0,
-	# which does pass '-d' to nvim as an argument,
+	# on stackoverflow refers to commands made default by git v2.32.0,
+	# which does pass `-d` to nvim as an argument,
 	# be certain to check the current git version in your machine
 	# to decide whether to use the defaults or not
 	cmd = nvim -d -c '4wincmd w | wincmd J' \"$LOCAL\" \"$BASE\" \"$REMOTE\" \"$MERGED\"

@@ -48,11 +48,6 @@
       import_role:
         name: dotfiles
 
-    - name: Git
-      tags: git
-      import_role:
-        name: git
-
     - name: Google style guide
       tags: googlestyleguide
       import_role:

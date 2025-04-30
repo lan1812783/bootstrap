@@ -5,12 +5,12 @@
 	email = buihoanglan.work@gmail.com
 	name = Bui Hoang Lan
 [core]
-	excludesFile = /home/lan/.gitignore_global
+	excludesFile = ~/.gitignore_global
 [diff]
 	tool = mynvimdiff
 	wsErrorHighlight = all # highlight removed trailing white spaces when using `git diff` (https://stackoverflow.com/a/5259137)
 [difftool]
-	prompt = False
+	prompt = false
 	trustExitCode = true # be able to abort all diffs with `:cq` or `:cquit` (https://stackoverflow.com/a/34065448)
 [difftool "mynvimdiff"]
 	# Although the default nvimdiff difftool command is viable,

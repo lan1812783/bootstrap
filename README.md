@@ -1,11 +1,12 @@
 # Bootstrap
 
-Set up personal environment (Ubuntu).
+Set up personal environment (Ubuntu, MacOS).
 
 ## Dependencies
 
 - Python 3
 - Ansible >= 2.13.0 ([required by ansible community.general version 8.1.0](https://galaxy.ansible.com/ui/repo/published/community/general/?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW&version=8.1.0))
+- Homebrew (MacOS only)
 
 ## Set up environment
 
@@ -27,7 +28,7 @@ python3 -m ansible playbook --ask-become-pass site.yml # if ansible is installed
 
 Close and reopen the terminal.
 
-## Change terminal font to Nerd Font
+## If use GNOME Terminal, change the font to Nerd Font
 
 1. Open 'Preferences' > 'Profiles'
 2. Select a profile to use

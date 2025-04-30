@@ -1,4 +1,4 @@
 ---
 - name: Install nvm and node
   import_tasks: unix.yml
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'MacOSX'

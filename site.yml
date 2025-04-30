@@ -7,6 +7,8 @@
       become: true
       package:
         update_cache: true
+      when:
+        ansible_distribution == 'Ubuntu'
   tasks:
     - name: Package
       tags: package

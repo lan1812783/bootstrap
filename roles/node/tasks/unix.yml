@@ -6,4 +6,4 @@
 
 - name: Install the latest version of node
   # https://stackoverflow.com/a/58744591/12141366
-  shell: bash -ilc 'nvm install node'
+  shell: "{{ 'bash' if ansible_distribution == 'Ubuntu' else 'zsh' }} -ilc 'nvm install node'"

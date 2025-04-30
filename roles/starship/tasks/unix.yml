@@ -2,8 +2,28 @@
 - name: Install/update starship
   shell: curl -sS https://starship.rs/install.sh | sh -s -- --yes
 
+- name: Set variables for Ubuntu distribution
+  set_fact:
+    rc_filename: .bashrc
+    shell: bash
+  when:
+    ansible_distribution == 'Ubuntu'
+
+- name: Set variables for MacOSX distribution
+  set_fact:
+    rc_filename: .zshrc
+    shell: zsh
+  when:
+    ansible_distribution == 'MacOSX'
+
+- name: Create .zshrc file
+  file:
+    path: '{{ ansible_env.HOME }}/.zshrc'
+    state: touch
+  when: ansible_distribution == 'MacOSX'
+
 - name: Set up init script
   lineinfile:
-    path: '{{ ansible_env.HOME }}/.bashrc'
-    regexp: 'eval "\$\(starship init bash\)"'
-    line: eval "$(starship init bash)"
+    path: "{{ ansible_env.HOME }}/{{ rc_filename }}"
+    regexp: 'eval "\$\(starship init {{ shell }}\)"'
+    line: eval "$(starship init {{ shell }})"

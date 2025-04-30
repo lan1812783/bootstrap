@@ -5,7 +5,7 @@
   ignore_errors: true
   changed_when: false
 
-- name: Install build prerequisites
+- name: Install build prerequisites for Ubuntu
   become: true
   package:
     name:
@@ -14,13 +14,22 @@
       - cmake
       - unzip
       - curl
-  when: nvim_version.rc != 0
+  when: nvim_version.rc != 0 and ansible_distribution == 'Ubuntu'
 
-- name: Install plugins' dependencies
-  become: true
+- name: Install build prerequisites for MacOS
   package:
     name:
-      - ripgrep # telescope.nvim
+      - ninja
+      - cmake
+      - gettext
+      - curl
+  when: nvim_version.rc != 0 and ansible_distribution == 'MacOSX'
+
+- name: Install plugins' dependencies
+  become: "{{ false if ansible_distribution == 'MacOSX' else true }}"
+  package:
+    name:
+      - ripgrep
   when: nvim_version.rc != 0
 
 - name: Create a directory for storing repositories

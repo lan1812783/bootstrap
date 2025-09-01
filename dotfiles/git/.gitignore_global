@@ -1,12 +1,15 @@
-# vscode
+# Visual Studio Code
 .vscode
 
 # clangd
 .cache
 
-#jdtls
+# Eclipse JDT Language Server
 .settings
 bin
 .classpath
 .project
 .factorypath
+
+# Mac
+.DS_Store

@@ -1,0 +1,17 @@
+---
+- name: Install essential packages
+  become: "{{ false if ansible_distribution == 'MacOSX' else true }}"
+  package:
+    name:
+      - htop
+      - tree
+      - tmux
+      - vim
+
+- name: Install addtional packages for Ubuntu
+  become: true
+  package:
+    name:
+      - g++ # contains cc1plus, which is needed by neovim plugin treesitter
+      - xsel # tmux plugin's tmux-yank's dependency
+  when: ansible_distribution == 'Ubuntu'

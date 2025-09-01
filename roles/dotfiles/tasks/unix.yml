@@ -1,14 +1,26 @@
 ---
 - name: Install GNU Stow
-  become: true
+  become: "{{ false if ansible_distribution == 'MacOSX' else true }}"
   package:
     name:
       - stow
 
+- name: Set variables for Ubuntu distribution
+  set_fact:
+    stow_packages: '*'
+    profile_filename: .profile
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Set variables for MacOSX distribution
+  set_fact:
+    stow_packages: editorconfig git nvim starship tmux vim
+    profile_filename: .zprofile
+  when: ansible_distribution == 'MacOSX'
+
 - name: Set up dotfiles
   shell:
     chdir: dotfiles
-    cmd: stow --target={{ ansible_env.HOME }} --verbose=2 *
+    cmd: stow --target={{ ansible_env.HOME }} --verbose=2 {{ stow_packages }}
   ignore_errors: true
   register: stow_result
   changed_when: 'stow_result.stderr is search("LINK: ")'
@@ -19,12 +31,12 @@
 
 - name: Set up EDITOR environment variable
   lineinfile:
-    path: '{{ ansible_env.HOME }}/.profile'
+    path: '{{ ansible_env.HOME }}/{{ profile_filename }}'
     regexp: '^export EDITOR='
     line: export EDITOR=nvim
 
 - name: Set up VISUAL environment variable
   lineinfile:
-    path: '{{ ansible_env.HOME }}/.profile'
+    path: '{{ ansible_env.HOME }}/{{ profile_filename }}'
     regexp: '^export VISUAL='
     line: export VISUAL=nvim

@@ -13,7 +13,7 @@ indent_style = tab
 [{.gitconfig,Makefile}]
 indent_size = 8
 
-[*.{py,gradle}]
+[*.{py,gradle,gradle.kts}]
 indent_size = 4
 
 [*.md]

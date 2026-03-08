@@ -7,8 +7,7 @@
       become: true
       package:
         update_cache: true
-      when:
-        ansible_distribution == 'Ubuntu'
+      when: ansible_facts['distribution'] == 'Ubuntu'
   tasks:
     - name: Package
       tags: package
@@ -35,20 +34,15 @@
       import_role:
         name: sdkman
 
-    - name: Vifm
-      tags: vifm
+    - name: Dotfiles
+      tags: dotfiles
       import_role:
-        name: vifm
+        name: dotfiles
 
     - name: Starship
       tags: starship
       import_role:
         name: starship
-
-    - name: Dotfiles
-      tags: dotfiles
-      import_role:
-        name: dotfiles
 
     - name: Google style guide
       tags: googlestyleguide

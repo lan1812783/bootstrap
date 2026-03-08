@@ -1,0 +1,10 @@
+theme = Catppuccin Frappe
+
+macos-titlebar-proxy-icon = hidden
+title = " "
+
+macos-option-as-alt = true
+
+shell-integration-features = ssh-env
+
+maximize = true

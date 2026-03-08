@@ -4,4 +4,4 @@
   loop:
     - look_and_feel.linux.yml
     - keybinding.linux.yml
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_facts['distribution'] == 'Ubuntu'

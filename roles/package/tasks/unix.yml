@@ -1,6 +1,6 @@
 ---
 - name: Install essential packages
-  become: "{{ false if ansible_distribution == 'MacOSX' else true }}"
+  become: "{{ false if ansible_facts['distribution'] == 'MacOSX' else true }}"
   package:
     name:
       - htop
@@ -13,5 +13,20 @@
   package:
     name:
       - g++ # contains cc1plus, which is needed by neovim plugin treesitter
-      - xsel # tmux plugin's tmux-yank's dependency
-  when: ansible_distribution == 'Ubuntu'
+      # - xsel # tmux plugin's tmux-yank's dependency
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Install addtional Snap packages for Ubuntu
+  become: true
+  community.general.snap:
+    name:
+      - ghostty
+    classic: true
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Install addtional packages for MacOS
+  community.general.homebrew_cask:
+    name:
+      - git # the default installed git does not contain the `contrib` utilities (https://github.com/git/git/tree/master/contrib)
+      - ghostty
+  when: ansible_facts['distribution'] == 'MacOSX'

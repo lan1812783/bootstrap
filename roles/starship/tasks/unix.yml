@@ -1,29 +1,28 @@
 ---
 - name: Install/update starship
-  shell: curl -sS https://starship.rs/install.sh | sh -s -- --yes
+  become: true
+  shell: curl -sS https://starship.rs/install.sh | sh -s -- --yes # ref: https://starship.rs/faq/#how-do-i-install-starship-without-sudo
 
 - name: Set variables for Ubuntu distribution
   set_fact:
     rc_filename: .bashrc
     shell: bash
-  when:
-    ansible_distribution == 'Ubuntu'
+  when: ansible_facts['distribution'] == 'Ubuntu'
 
 - name: Set variables for MacOSX distribution
   set_fact:
     rc_filename: .zshrc
     shell: zsh
-  when:
-    ansible_distribution == 'MacOSX'
+  when: ansible_facts['distribution'] == 'MacOSX'
 
 - name: Create .zshrc file
   file:
-    path: '{{ ansible_env.HOME }}/.zshrc'
+    path: "{{ ansible_facts['env']['HOME'] }}/.zshrc"
     state: touch
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts['distribution'] == 'MacOSX'
 
 - name: Set up init script
   lineinfile:
-    path: "{{ ansible_env.HOME }}/{{ rc_filename }}"
+    path: "{{ ansible_facts['env']['HOME'] }}/{{ rc_filename }}"
     regexp: 'eval "\$\(starship init {{ shell }}\)"'
     line: eval "$(starship init {{ shell }})"

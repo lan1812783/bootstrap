@@ -1,4 +1,0 @@
----
-- name: Install vifm
-  import_tasks: unix.yml
-  when: ansible_distribution == 'Ubuntu'

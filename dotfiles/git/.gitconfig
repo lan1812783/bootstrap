@@ -6,9 +6,11 @@
 	name = Bui Hoang Lan
 [core]
 	excludesFile = ~/.gitignore_global
+	pager = "DIFF_HIGHLIGHT_PATH=/usr/share/doc/git/contrib/diff-highlight/diff-highlight; [ -f $DIFF_HIGHLIGHT_PATH ] || ! command -v brew >/dev/null 2>&1 || DIFF_HIGHLIGHT_PATH=$(brew --prefix git)/share/git-core/contrib/diff-highlight/diff-highlight; [ -f $DIFF_HIGHLIGHT_PATH ] && perl $DIFF_HIGHLIGHT_PATH | less || less"
 [diff]
 	tool = mynvimdiff
 	wsErrorHighlight = all # highlight removed trailing white spaces when using `git diff` (https://stackoverflow.com/a/5259137)
+	colorMoved = dimmed-zebra
 [difftool]
 	prompt = false
 	trustExitCode = true # be able to abort all diffs with `:cq` or `:cquit` (https://stackoverflow.com/a/34065448)
@@ -34,3 +36,5 @@
 	# be certain to check the current git version in your machine
 	# to decide whether to use the defaults or not
 	cmd = nvim -d -c '4wincmd w | wincmd J' \"$LOCAL\" \"$BASE\" \"$REMOTE\" \"$MERGED\"
+[interactive]
+	diffFilter = "DIFF_HIGHLIGHT_PATH=/usr/share/doc/git/contrib/diff-highlight/diff-highlight; [ -f $DIFF_HIGHLIGHT_PATH ] || ! command -v brew >/dev/null 2>&1 || DIFF_HIGHLIGHT_PATH=$(brew --prefix git)/share/git-core/contrib/diff-highlight/diff-highlight; [ -f $DIFF_HIGHLIGHT_PATH ] && perl $DIFF_HIGHLIGHT_PATH || cat"

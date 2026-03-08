@@ -41,3 +41,31 @@ Close and reopen the terminal.
 1. Launch tmux
 2. Run `tmux source ~/.tmux.conf`
 3. Press `prefix` + `I`, wait a bit for everything to be up and running
+
+## Occasionally update Neovim to its latest stable version
+
+The bootstrapping process skips Neovim latest stable installation if it finds `nvim` binary on the system. To force the installation, run this command:
+
+```bash
+# Ref: https://fabianlee.org/2021/07/28/ansible-overriding-boolean-values-using-extra-vars-at-runtime/#:~:text=If%20you%20are%20using%20%E2%80%9C%E2%80%93extra,%22%20when:%20not%20myflag%7Cbool
+python3 -m ansible playbook --ask-become-pass --tag neovim --extra-vars '{"nvim_force_installation": true}' site.yml # if ansible is installed using pip
+# ansible-playbook --ask-become-pass --tag neovim --extra-vars '{"nvim_force_installation": true}' site.yml # if ansible is installed using package manager
+```
+
+## Ubuntu 25.10 `sudo` issue
+
+Ubuntu 25.10 ships with Rust-based replacements for key system utilities, including `rust-coreutils` and `sudo-rs` (a Rust implementation of `sudo`). The change causes `Ansible` to [fail](https://www.reddit.com/r/selfhosted/comments/1ofrfha/using_ansible_to_patch_ubuntu_2510) when working with the `become` option family. As a workaround, switch the system to the legacy `sudo` binary to restore compatibility.
+
+```bash
+$ sudo update-alternatives --config sudo
+There are 2 choices for the alternative sudo (providing /usr/bin/sudo).
+
+  Selection    Path                     Priority   Status
+------------------------------------------------------------
+* 0            /usr/lib/cargo/bin/sudo   50        auto mode
+  1            /usr/bin/sudo.ws          40        manual mode
+  2            /usr/lib/cargo/bin/sudo   50        manual mode
+
+Press <enter> to keep the current choice[*], or type selection number: 1
+update-alternatives: using /usr/bin/sudo.ws to provide /usr/bin/sudo (sudo) in manual mode
+```

@@ -1,1 +1,1 @@
-font_dir_path: '{{ ansible_env.HOME }}/.local/share/fonts'
+font_dir_path: "{{ ansible_facts['env']['HOME'] }}/.local/share/fonts"

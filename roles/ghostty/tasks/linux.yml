@@ -1,0 +1,15 @@
+---
+- name: Install ghostty
+  become: true
+  community.general.snap:
+    name:
+      - ghostty
+    classic: true
+
+- name: Set ghostty as the default terminal emulator
+  become: true
+  community.general.alternatives:
+    link: /usr/bin/x-terminal-emulator
+    name: x-terminal-emulator
+    path: /snap/bin/ghostty
+    priority: 100

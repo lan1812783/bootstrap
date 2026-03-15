@@ -1,0 +1,8 @@
+---
+- name: Install ghostty for Ubuntu distribution
+  import_tasks: linux.yml
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Install ghostty for MacOSX distribution
+  import_tasks: macosx.yml
+  when: ansible_facts['distribution'] == 'MacOSX'

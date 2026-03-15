@@ -4,6 +4,7 @@ Set up personal environment (Ubuntu, MacOS).
 
 ## Dependencies
 
+- Ubuntu >= 24.04 if used (for Ghostty installation)
 - Python 3
 - Ansible >= 2.13.0 ([required by ansible community.general version 8.1.0](https://galaxy.ansible.com/ui/repo/published/community/general/?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW&version=8.1.0))
 - Homebrew (MacOS only)
@@ -69,3 +70,14 @@ There are 2 choices for the alternative sudo (providing /usr/bin/sudo).
 Press <enter> to keep the current choice[*], or type selection number: 1
 update-alternatives: using /usr/bin/sudo.ws to provide /usr/bin/sudo (sudo) in manual mode
 ```
+
+## Additional MacOS settings
+
+Some MacOS settings are quite tedious to be configured via Ansible (just like `Profiles` in GNOME Terminal), just configure them via the UI for simplicity sake.
+
+Display battery percentage:
+`Preferences > Menu Bar > Baterry Options... > Show Percentage`
+
+MacOS has a default `Control Space` shortcut to select the previous input source at:
+`Preferences > Keyboard > Keyboard shortcuts > Input sources > Select the previous input source`
+Disable it or change its shortcut to another (e.g. `Option Space`) so that `Control Space` can be used to trigger code suggestion while in text editor or IDE.

@@ -34,6 +34,11 @@
       import_role:
         name: sdkman
 
+    - name: Ghostty
+      tags: ghostty
+      import_role:
+        name: ghostty
+
     - name: Dotfiles
       tags: dotfiles
       import_role:

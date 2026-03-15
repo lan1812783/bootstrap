@@ -25,13 +25,6 @@
       - curl
   when: (nvim_version.rc != 0 or nvim_force_installation) and ansible_facts['distribution'] == 'MacOSX'
 
-- name: Install plugins' dependencies
-  become: "{{ false if ansible_facts['distribution'] == 'MacOSX' else true }}"
-  package:
-    name:
-      - ripgrep
-  when: nvim_version.rc != 0 or nvim_force_installation
-
 - name: Create a directory for storing repositories
   file:
     path: '{{ dep_dir_path }}'
@@ -44,6 +37,12 @@
     dest: '{{ dep_dir_path }}/neovim'
     version: stable
     force: '{{ nvim_force_installation }}'
+  when: nvim_version.rc != 0 or nvim_force_installation
+
+- name: Clean up built artifacts
+  community.general.make:
+    chdir: '{{ dep_dir_path }}/neovim'
+    target: distclean
   when: nvim_version.rc != 0 or nvim_force_installation
 
 - name: Build the stable release
@@ -59,4 +58,11 @@
   community.general.make:
     chdir: '{{ dep_dir_path }}/neovim'
     target: install
+  when: nvim_version.rc != 0 or nvim_force_installation
+
+- name: Install plugins' dependencies
+  become: "{{ false if ansible_facts['distribution'] == 'MacOSX' else true }}"
+  package:
+    name:
+      - ripgrep
   when: nvim_version.rc != 0 or nvim_force_installation

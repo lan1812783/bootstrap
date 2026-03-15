@@ -4,6 +4,11 @@
     name:
       - psutil>=4.0.0
 
+- name: Enable dark mode
+  community.general.dconf:
+    key: '/org/gnome/desktop/interface/color-scheme'
+    value: "'prefer-dark'" # needs additional quoting, ref: https://askubuntu.com/questions/487206/dconf-change-a-string-key
+
 - name: Show seconds in clock
   community.general.dconf:
     key: '/org/gnome/desktop/interface/clock-show-seconds'

@@ -5,7 +5,6 @@
     state: directory
 
 - name: Install font
-  shell:
-    chdir: '{{ font_dir_path }}'
-    cmd: curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/refs/heads/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf
-    creates: '{{ font_dir_path }}/JetBrainsMonoNerdFont-Regular.ttf'
+  get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/raw/refs/heads/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf
+    dest: '{{ font_dir_path }}/JetBrainsMonoNerdFont-Regular.ttf'

@@ -20,7 +20,7 @@
 - name: Set up dotfiles
   shell:
     chdir: dotfiles
-    cmd: stow --target={{ ansible_facts['env']['HOME'] }} --verbose=2 {{ stow_packages }}
+    cmd: stow --target={{ ansible_facts['env']['HOME'] }} --verbose=2 --restow {{ stow_packages }}
   ignore_errors: true
   register: stow_result
   changed_when: 'stow_result.stderr is search("LINK: ")'

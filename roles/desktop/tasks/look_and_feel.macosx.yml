@@ -1,0 +1,12 @@
+---
+- name: Enable dark mode
+  community.general.osx_defaults:
+    key: AppleInterfaceStyle
+    value: Dark
+
+- name: Show seconds in the clock
+  community.general.osx_defaults:
+    domain: com.apple.menuextra.clock
+    key: ShowSeconds
+    type: int
+    value: 1

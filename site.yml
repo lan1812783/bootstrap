@@ -14,11 +14,6 @@
       import_role:
         name: package
 
-    - name: Node
-      tags: node
-      import_role:
-        name: node
-
     - name: Font
       tags: font
       import_role:
@@ -29,11 +24,6 @@
       import_role:
         name: neovim
 
-    - name: SDKMAN!
-      tags: sdkman
-      import_role:
-        name: sdkman
-
     - name: Ghostty
       tags: ghostty
       import_role:
@@ -43,6 +33,16 @@
       tags: dotfiles
       import_role:
         name: dotfiles
+
+    - name: Node
+      tags: node
+      import_role:
+        name: node
+
+    - name: SDKMAN!
+      tags: sdkman
+      import_role:
+        name: sdkman
 
     - name: Starship
       tags: starship

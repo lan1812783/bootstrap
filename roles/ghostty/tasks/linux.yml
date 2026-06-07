@@ -13,3 +13,6 @@
     name: x-terminal-emulator
     path: /snap/bin/ghostty
     priority: 100
+
+- name: Install shader
+  import_tasks: shader_unix.yml

@@ -1,0 +1,10 @@
+---
+- name: Create directory to store shaders
+  file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/ghostty/shaders"
+    state: directory
+
+- name: Download cursor smear shader
+  get_url:
+    url: https://raw.githubusercontent.com/KroneCorylus/ghostty-shader-playground/refs/heads/main/public/shaders/cursor_smear.glsl
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/ghostty/shaders/cursor_smear.glsl"

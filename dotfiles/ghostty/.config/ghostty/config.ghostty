@@ -8,3 +8,5 @@ macos-option-as-alt = true
 shell-integration-features = ssh-env
 
 maximize = true
+
+custom-shader = shaders/cursor_smear.glsl

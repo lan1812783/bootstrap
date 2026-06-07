@@ -18,7 +18,7 @@
 	# Although the default nvimdiff difftool command is viable,
 	# defining a custom one here for nvim non-readonly mode and
 	# consistency across git versions (see mergetool config section for more details)
-	cmd = nvim -d -c 'wincmd l' \"$LOCAL\" \"$REMOTE\"
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 [init]
 	defaultBranch = main
 [merge]

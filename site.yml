@@ -29,6 +29,11 @@
       import_role:
         name: ghostty
 
+    - name: Key pair
+      tags: keypair
+      import_role:
+        name: keypair
+
     - name: Dotfiles
       tags: dotfiles
       import_role:

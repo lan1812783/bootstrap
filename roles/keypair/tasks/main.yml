@@ -1,0 +1,4 @@
+---
+- name: Set up key pair
+  import_tasks: unix.yml
+  when: ansible_facts['distribution'] == 'Ubuntu' or ansible_facts['distribution'] == 'MacOSX'

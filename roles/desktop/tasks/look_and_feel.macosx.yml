@@ -10,3 +10,10 @@
     key: ShowSeconds
     type: int
     value: 1
+
+- name: Enable trackpad's tap to click
+  community.general.osx_defaults:
+    domain: com.apple.AppleMultitouchTrackpad
+    key: Clicking
+    type: int
+    value: 1

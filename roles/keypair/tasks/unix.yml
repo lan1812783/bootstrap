@@ -1,0 +1,25 @@
+---
+- name: Generate SSH key pair
+  community.crypto.openssh_keypair:
+    path: '{{ ssh_key_path }}'
+    type: ed25519
+
+- name: Get public key content
+  command: 'cat {{ ssh_key_path }}.pub'
+  register: public_key_content
+
+- name: Display public key
+  debug:
+    msg: '{{ public_key_content.stdout }}'
+
+- name: Add SSH key to Github
+  debug:
+    msg:
+      - 'Go to https://github.com/settings/keys'
+      - "Click 'New SSH key'"
+      - "Input key title 'SSH Authentication Key'"
+      - "Choose key type 'Authentication Key"
+      - 'Paste the content of the key from above'
+      - "Click 'Add SSH Key'"
+      - "Do the same for key type 'Signing Key'"
+      - 'REVIEW OTHER EXISTING KEYS AND DELETE THEM IF THEY ARE NO LONGER RELEVANT'
